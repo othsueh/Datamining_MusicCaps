@@ -28,17 +28,7 @@ def convert_csv_to_arff(csv_file, arff_file):
         
         # Add data section
         for _, row in df.iterrows():
-            processed_values = []
-            for value in row.values:
-                # Replace double quotes with single quotes
-                str_value = str(value).replace("\"", "'")
-                
-                # Check if the value contains commas; if so, wrap it in double quotes
-                if isinstance(value, str):
-                    str_value = f'"{str_value}"'
-                
-                processed_values.append(str_value)
-            
-            f.write(','.join(processed_values) + '\n')
+            f.write(','.join(map(str, row.values)) + '\n')
+
 # Example usage:
 convert_csv_to_arff('musiccaps-public.csv', 'dataset.arff')
